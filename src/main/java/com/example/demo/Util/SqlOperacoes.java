@@ -13,16 +13,9 @@ public class SqlOperacoes {
         	
 		try {
             Statement ps = conexao.getConexao().createStatement();
-            ResultSet rs = ps.executeQuery(sql);
+            ResultSet response = ps.executeQuery(sql);
 
-            while (rs.next())
-            {
-                int id = rs.getInt("id");
-                String nome = rs.getString("nome");
-                
-                System.out.format("%s, %s\n", id, nome);
-            }
-			return rs;
+			return response;
 		}
 		catch (Exception e ) {
 			e.getStackTrace();
