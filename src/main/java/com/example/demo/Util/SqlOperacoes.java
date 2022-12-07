@@ -7,7 +7,8 @@ import java.sql.Statement;
 
 public class SqlOperacoes {
 
-    public static ResultSet executarSql(String sql) {
+    // consultar
+    public static ResultSet consulta(String sql) {
         Conexao conexao = new Conexao();
         	
 		try {
@@ -18,10 +19,8 @@ public class SqlOperacoes {
             {
                 int id = rs.getInt("id");
                 String nome = rs.getString("nome");
-                int idade = rs.getInt("idade");
                 
-                // print the results
-                System.out.format("%s, %s, %s\n", id, nome, idade);
+                System.out.format("%s, %s\n", id, nome);
             }
 			return rs;
 		}
@@ -30,4 +29,23 @@ public class SqlOperacoes {
 		}
         return null;
     }
+
+    // inserir, deletar ou atualizar
+    public static String executar(String sql) {
+        Conexao conexao = new Conexao();
+        	
+		try {
+            Statement ps = conexao.getConexao().createStatement();
+            ps.executeUpdate(sql);
+
+			return "sucesso";
+		}
+		catch (Exception e ) {
+			e.getStackTrace();
+
+            return e.getMessage();
+		}
+        
+    }
+
 }

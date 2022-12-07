@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.Models.Cliente;
+import com.example.demo.Util.SqlOperacoes;
 
 @Service
 public class ClienteService {
@@ -19,6 +20,13 @@ public class ClienteService {
   }
 
   public ResponseEntity<Cliente> create(Cliente cliente) {
+    String sql = String.format("insert into clientes (nome, email, telefone) values ('%s', '%s', %d)", 
+      cliente.getNome(), 
+      cliente.getEmail(), 
+      cliente.getTelefone()
+    );
+
+    SqlOperacoes.executar(sql);
     return ResponseEntity.ok(cliente);
   }
 }
