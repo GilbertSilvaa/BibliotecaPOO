@@ -32,8 +32,8 @@ public class UsuarioRoutes {
 	@PostMapping(value="/usuario/create", 
 		consumes = MediaType.APPLICATION_JSON_VALUE, 
 		produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Usuario> createUsuario(@RequestBody Usuario cliente) {  
-    return usuarioService.create(cliente);
+	public ResponseEntity<Usuario> createUsuario(@RequestBody Usuario usuario) {  
+    return usuarioService.create(usuario);
 	}
 
 	@GetMapping(value="/usuario/{id}")
@@ -44,8 +44,8 @@ public class UsuarioRoutes {
 	@PutMapping(value="/usuario/update", 
 		consumes = MediaType.APPLICATION_JSON_VALUE, 
 		produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Usuario> updateUsuario(@RequestBody Usuario cliente) {  
-    return usuarioService.update(cliente);
+	public ResponseEntity<Usuario> updateUsuario(@RequestBody Usuario usuario) {  
+    return usuarioService.update(usuario);
 	}
 
 	@DeleteMapping(value="/usuario/delete/{id}")

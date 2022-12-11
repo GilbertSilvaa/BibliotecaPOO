@@ -153,3 +153,66 @@ begin
 	delete from livro_autor where id_autor = autor_id;
 
 end$$
+
+DELIMITER $$
+create procedure P_EDITORA_INSERIR(
+	editora_nome VARCHAR(50),
+	endereco_cep INT,
+    endereco_numero INT,
+    endereco_referencia VARCHAR(255)
+)
+begin
+
+	insert into enderecos (cep, numero, referencia) values (
+		endereco_cep,
+        endereco_numero,
+        endereco_referencia
+    );
+    
+    insert into editoras (nome, id_endereco) values (
+		editora_nome,
+        (select max(id) from enderecos)
+    ); 
+    
+end $$
+
+DELIMITER $$
+create procedure P_EDITORA_ATUALIZAR (
+	editora_id INT,
+	editora_nome VARCHAR(50),
+	endereco_cep INT,
+    endereco_numero INT,
+    endereco_referencia VARCHAR(255)
+)
+begin
+
+	update editoras set
+    nome = editora_nome
+    where id = editora_id;
+    
+    update enderecos set
+    cep = endereco_cep,
+    numero = endereco_numero,
+    referencia = endereco_referencia
+    where id = (select id_endereco from editoras where id = usuario_id);
+
+end$$
+
+
+DELIMITER $$
+create procedure P_EDITORA_DELETAR (
+	editora_id INT
+)
+begin
+
+    set FOREIGN_KEY_CHECKS=0; -- to disable them
+	delete from enderecos where id = (select id_endereco from editoras where editoras.id = editora_id);
+	set FOREIGN_KEY_CHECKS=1; -- to re-enable them
+    
+	delete from editoras where id = editora_id;
+    
+	delete from pedido_itens where id_livro in (select id from livros where id_editora = editora_id);
+    
+    delete from livros where id_editora = editora_id;
+	
+end$$
