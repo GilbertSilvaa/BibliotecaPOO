@@ -70,6 +70,16 @@ CONSTRAINT fk_id_livro FOREIGN KEY (id_livro)
 REFERENCES biblioteca.livros(id)
 );
 
+# TABELA DE RELACIONAMENTO LIVRO - AUTORES
+CREATE TABLE IF NOT EXISTS livro_autor (
+id_livro INT NOT NULL,
+id_autor INT NOT NULL,
+CONSTRAINT fk_id_livro_ FOREIGN KEY (id_livro)
+REFERENCES biblioteca.livros(id),
+CONSTRAINT fk_id_autor_ FOREIGN KEY (id_autor)
+REFERENCES biblioteca.autores(id)
+);
+
 DELIMITER $$
 create procedure P_USUARIO_INSERIR(
 	usuario_nome VARCHAR(50),
@@ -129,5 +139,17 @@ begin
 	delete from pedido_itens where id_pedido in (select id from pedidos where id_usuario = usuario_id);
         
     delete from pedidos where id_usuario = usuario_id;
+
+end$$
+
+DELIMITER $$
+create procedure P_AUTOR_DELETAR (
+	autor_id INT
+)
+begin
+
+	delete from autores where id = autor_id;
+    
+	delete from livro_autor where id_autor = autor_id;
 
 end$$
