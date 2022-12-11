@@ -15,10 +15,11 @@ public class UsuarioService {
 
   public UsuarioService() {}
   
+  // busca todos os usuarios
   public ResponseEntity<List<Usuario>> getAll(){
     List<Usuario> usuarios = new ArrayList<>();
-
-    String queryCliente = "select " +
+    
+    String query = "select " +
     " usuarios.id as usuario_id," +
     " usuarios.nome as usuario_nome," +
     " enderecos.cep as endereco_cep," +
@@ -27,7 +28,7 @@ public class UsuarioService {
     " from usuarios " +
     " inner join enderecos on usuarios.id_endereco = enderecos.id";
 
-    ResultSet usuariosResponse = SqlOperacoes.consulta(queryCliente);
+    ResultSet usuariosResponse = SqlOperacoes.consulta(query);
 
     try {
       while(usuariosResponse.next()) {
@@ -44,26 +45,89 @@ public class UsuarioService {
 
         usuarios.add(usuario);
       }
-    }catch(Exception e) {
+    }
+    catch(Exception e) {
       e.getStackTrace();
     }
 
     return ResponseEntity.ok(usuarios);
   }
 
-  public ResponseEntity<Usuario> create(Usuario cliente) {
+  // busca usuario por id
+  public ResponseEntity<Usuario> getById(int idUsuario){
+    Usuario usuario  = new Usuario();
+    Endereco endereco = new Endereco();
 
-    String queryUsuarioCreate = String.format("CALL P_USUARIO_INSERIR('%s', %d, %d, '%s')", 
-      cliente.getNome(),
-      cliente.getEndereco().getCEP(),
-      cliente.getEndereco().getNumero(),
-      cliente.getEndereco().getReferencia()
+    String pre_query = "select " +
+    " usuarios.id as usuario_id," +
+    " usuarios.nome as usuario_nome," +
+    " enderecos.cep as endereco_cep," +
+    " enderecos.numero as endereco_numero," +
+    " enderecos.referencia as endereco_referencia" +
+    " from usuarios " +
+    " inner join enderecos on usuarios.id_endereco = enderecos.id" +
+    " where usuarios.id = %d";
+
+    String query = String.format(pre_query, idUsuario);
+
+    ResultSet usuarioResponse = SqlOperacoes.consulta(query);
+
+    try {
+      while(usuarioResponse.next()) {
+        endereco.setCEP(usuarioResponse.getInt("endereco_cep"));
+        endereco.setNumero(usuarioResponse.getInt("endereco_numero"));
+        endereco.setReferencia(usuarioResponse.getString("endereco_referencia"));
+
+        usuario.setId(usuarioResponse.getInt("usuario_id"));
+        usuario.setNome(usuarioResponse.getString("usuario_nome"));
+        usuario.setEndereco(endereco);
+      }
+    }
+    catch(Exception e){
+      e.getStackTrace();
+    }
+
+    return ResponseEntity.ok(usuario);
+  }
+  
+  // cria usuario
+  public ResponseEntity<Usuario> create(Usuario usuario) {
+
+    String query = String.format("call P_USUARIO_INSERIR('%s', %d, %d, '%s')", 
+      usuario.getNome(),
+      usuario.getEndereco().getCEP(),
+      usuario.getEndereco().getNumero(),
+      usuario.getEndereco().getReferencia()
     );
     
-    String mensagem = SqlOperacoes.executar(queryUsuarioCreate);
+    SqlOperacoes.executar(query);
 
-    System.out.println(mensagem);
+    return ResponseEntity.ok(usuario);
+  }
 
-    return ResponseEntity.ok(cliente);
+  // atualizar usuario
+  public ResponseEntity<Usuario> update(Usuario usuario) {
+
+    String query = String.format("call P_USUARIO_ATUALIZAR(%d,'%s', %d, %d, '%s')", 
+      usuario.getId(),
+      usuario.getNome(),
+      usuario.getEndereco().getCEP(),
+      usuario.getEndereco().getNumero(),
+      usuario.getEndereco().getReferencia()
+    );
+
+    SqlOperacoes.executar(query);
+
+    return ResponseEntity.ok(usuario);
+  }
+
+  // deletar usuario
+  public ResponseEntity<String> delete(int idUsuario) {
+
+    String query = String.format("call P_USUARIO_DELETAR(%d)", idUsuario);
+
+    SqlOperacoes.executar(query);
+
+    return ResponseEntity.ok("usuario deletado com sucesso");
   }
 }
