@@ -1,9 +1,7 @@
-package com.example.demo.Db;
+package com.example.biblioteca.Db;
 
 import java.sql.DriverManager;
 import java.sql.SQLException;
-
-
 import java.sql.Connection;
 
 public class Conexao {
@@ -12,7 +10,7 @@ public class Conexao {
 
     public Connection conectar() {
         try {
-	        connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/bibliotecapoo", "root", "root");
+	        connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/biblioteca", "root", "Ringkyu777#");
 	        if (connection != null) {
 	            System.out.println("Conexão realizada!");
 	            System.out.println("conn:" + connection);

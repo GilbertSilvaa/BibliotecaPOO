@@ -1,4 +1,4 @@
-package com.example.demo.Routes;
+package com.example.biblioteca.Routes;
 
 import java.util.List;
 
@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.Models.Livro;
-import com.example.demo.Services.LivroService;
+import com.example.biblioteca.Models.Livro;
+import com.example.biblioteca.Services.LivroService;
 
 @RestController
 public class LivroRoutes {

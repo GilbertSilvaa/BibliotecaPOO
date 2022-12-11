@@ -1,4 +1,4 @@
-package com.example.demo.Services;
+package com.example.biblioteca.Services;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.Models.Livro;
+import com.example.biblioteca.Models.Livro;
 
 @Service
 public class LivroService {

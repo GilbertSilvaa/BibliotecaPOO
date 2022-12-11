@@ -1,8 +1,8 @@
-package com.example.demo.Util;
+package com.example.biblioteca.Util;
 
 import java.sql.ResultSet;
 
-import com.example.demo.Db.Conexao;
+import com.example.biblioteca.Db.Conexao;
 import java.sql.Statement;
 
 public class SqlOperacoes {

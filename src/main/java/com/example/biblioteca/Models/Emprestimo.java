@@ -1,11 +1,11 @@
-package com.example.demo.Models;
+package com.example.biblioteca.Models;
 
 import java.util.Date;
 import java.util.List;
 
 public class Emprestimo {
   private int id;
-  private Cliente cliente;
+  private Usuario cliente;
   private List<Livro> livros;
   private Date dataEmprestimo;
   private Date dataDevolucao;
@@ -13,7 +13,7 @@ public class Emprestimo {
   public void setId(int id) {
     this.id = id;
   }
-  public void setCliente(Cliente cliente) {
+  public void setCliente(Usuario cliente) {
     this.cliente = cliente;
   }
   public void setLivros(List<Livro> livros) {
@@ -29,7 +29,7 @@ public class Emprestimo {
   public int getId() {
     return id;
   }
-  public Cliente getCliente() {
+  public Usuario getCliente() {
     return cliente;
   }
   public List<Livro> getLivros() {

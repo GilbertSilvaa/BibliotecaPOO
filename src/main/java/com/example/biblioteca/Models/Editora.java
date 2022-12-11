@@ -1,9 +1,8 @@
-package com.example.demo.Models;
+package com.example.biblioteca.Models;
 
-public class Autor {
+public class Editora {
   private int id;
   private String nome;
-  private String sobrenome;
 
   public void setId(int id) {
     this.id = id;
@@ -11,17 +10,11 @@ public class Autor {
   public void setNome(String nome) {
     this.nome = nome;
   }
-  public void setSobrenome(String sobrenome) {
-    this.sobrenome = sobrenome;
-  }
 
   public int getId() {
     return id;
   }
   public String getNome() {
     return nome;
-  }
-  public String getSobrenome() {
-    return sobrenome;
   }
 }
