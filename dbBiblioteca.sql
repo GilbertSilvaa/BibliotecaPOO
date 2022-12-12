@@ -38,6 +38,7 @@ CREATE TABLE IF NOT EXISTS livros (
 id INT PRIMARY KEY AUTO_INCREMENT,
 titulo VARCHAR(50),
 id_editora INT NOT NULL,
+qtd_exemplares INT ,
 CONSTRAINT fk_id_editora FOREIGN KEY (id_editora)
 REFERENCES biblioteca.editoras(id)
 );
@@ -232,4 +233,18 @@ begin
     
     delete from livros where id = livro_id;
 
+end$$
+
+
+DELIMITER $$
+create procedure P_PEDIDO_DELETAR (
+	pedido_id INT
+)
+begin
+
+    set FOREIGN_KEY_CHECKS=0; -- to disable them
+	delete from pedidos where id = pedido_id;
+    
+    delete from pedido_itens where id_pedido = pedido_id;
+	
 end$$

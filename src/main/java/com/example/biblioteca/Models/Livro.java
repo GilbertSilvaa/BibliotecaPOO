@@ -8,6 +8,7 @@ public class Livro {
   private String titulo;
   private Editora editora;
   private List<Autor> autores;
+  private int quantidade;
 
   public void setId(int id) {
     this.id = id;
@@ -21,6 +22,9 @@ public class Livro {
   public void setAutores(List<Autor> autores) {
     this.autores = autores;
   }
+  public void setQuantidade(int quantidade) {
+    this.quantidade = quantidade;
+  }
 
   public int getId() {
     return id;
@@ -33,5 +37,8 @@ public class Livro {
   }
   public List<Autor> getAutores() {
     return autores;
+  }
+  public int getQuantidade() {
+    return quantidade;
   }
 }

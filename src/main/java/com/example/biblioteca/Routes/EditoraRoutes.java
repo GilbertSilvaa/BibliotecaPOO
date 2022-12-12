@@ -31,7 +31,7 @@ public class EditoraRoutes {
 
   @GetMapping(value="/editora/{id}")
 	public ResponseEntity<Editora> getEditoraById(@PathVariable int id){
-		return editoraService.getByid(id);
+		return editoraService.getById(id);
 	}
 
   @PostMapping(value="/editora/create", 

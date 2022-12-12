@@ -11,7 +11,6 @@ public class Endereco {
   public void setNumero(int numero) {
     this.numero = numero;
   }
-
   public void setReferencia(String referencia) {
     this.referencia = referencia;
   }

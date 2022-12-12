@@ -26,6 +26,7 @@ public class LivroService {
     String query = "select" +
     " livros.id as livro_id," +
     " livros.titulo as livro_titulo," +
+    " livros.qtd_exemplares as livro_qtd_exemplares," +
     " editoras.id as editora_id," +
     " editoras.nome as editora_nome," +
     " enderecos.cep as endereco_editora_cep," +
@@ -81,6 +82,7 @@ public class LivroService {
         livro.setTitulo(livrosResponse.getString("livro_titulo"));
         livro.setEditora(editora);
         livro.setAutores(autores);
+        livro.setQuantidade(livrosResponse.getInt("livro_qtd_exemplares"));
 
         livros.add(livro);
       }
@@ -99,6 +101,7 @@ public class LivroService {
     String query = "select" +
     " livros.id as livro_id," +
     " livros.titulo as livro_titulo," +
+    " livros.qtd_exemplares as livro_qtd_exemplares," +
     " editoras.id as editora_id," +
     " editoras.nome as editora_nome," +
     " enderecos.cep as endereco_editora_cep," +
@@ -154,6 +157,7 @@ public class LivroService {
         livro.setTitulo(livroResponse.getString("livro_titulo"));
         livro.setEditora(editora);
         livro.setAutores(autores);
+        livro.setQuantidade(livroResponse.getInt("livro_qtd_exemplares"));
       }
     }
     catch(Exception e) {
@@ -166,9 +170,13 @@ public class LivroService {
   // criar livro
   public ResponseEntity<Livro> create(Livro livro) {
 
-    String query = "insert into livros (titulo, id_editora) values ('%s', %d)";
+    String query = "insert into livros (titulo, id_editora, qtd_exemplares) values ('%s', %d, %d)";
 
-    SqlOperacoes.executar(String.format(query, livro.getTitulo(), livro.getEditora().getId()));
+    SqlOperacoes.executar(String.format(query, 
+      livro.getTitulo(), 
+      livro.getEditora().getId(),
+      livro.getQuantidade()
+    ));
 
     ResultSet idLivro = SqlOperacoes.consulta("select max(id) as id_livro from livros");
 
@@ -193,11 +201,12 @@ public class LivroService {
   // atualizar livro
   public ResponseEntity<Livro> update(Livro livro) {
 
-    String query = "update livros set titulo = '%s', id_editora = %d where id = %d";
+    String query = "update livros set titulo = '%s', id_editora = %d, qtd_exemplares = %d where id = %d";
 
     SqlOperacoes.executar(String.format(query, 
       livro.getTitulo(), 
       livro.getEditora().getId(), 
+      livro.getQuantidade(), 
       livro.getId()
     ));
 

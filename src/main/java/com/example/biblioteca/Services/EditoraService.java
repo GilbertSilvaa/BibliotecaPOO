@@ -56,7 +56,7 @@ public class EditoraService {
   }
 
   // busca editora por id
-  public ResponseEntity<Editora> getByid(int idEditora) {
+  public ResponseEntity<Editora> getById(int idEditora) {
     Editora editora = new Editora();
     Endereco endereco = new Endereco();
 
