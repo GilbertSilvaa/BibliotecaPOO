@@ -1,5 +1,6 @@
 package com.example.biblioteca.Services;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -101,6 +102,16 @@ public class UsuarioService {
     );
     
     SqlOperacoes.executar(query);
+
+    ResultSet idUsuario = SqlOperacoes.consulta("select max(id) as id_usuario from usuarios");
+
+    try {
+      while(idUsuario.next()) {
+        usuario.setId(idUsuario.getInt("id_usuario"));
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
 
     return ResponseEntity.ok(usuario);
   }

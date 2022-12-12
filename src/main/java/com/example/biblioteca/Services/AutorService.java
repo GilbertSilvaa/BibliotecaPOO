@@ -1,6 +1,7 @@
 package com.example.biblioteca.Services;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,6 +69,16 @@ public class AutorService {
     String query = String.format("insert into autores (nome) values ('%s')", autor.getNome());
 
     SqlOperacoes.executar(query);
+
+    ResultSet idAutor = SqlOperacoes.consulta("select max(id) as id_autor from autores");
+
+    try {
+      while(idAutor.next()) {
+        autor.setId(idAutor.getInt("id_autor"));
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
 
     return ResponseEntity.ok(autor);
   }

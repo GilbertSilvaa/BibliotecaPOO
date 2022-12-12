@@ -131,10 +131,12 @@ create procedure P_USUARIO_DELETAR (
 )
 begin
 
-	delete from usuarios where id = usuario_id;
-    
+    set FOREIGN_KEY_CHECKS=0; -- to disable them
     delete from enderecos
     where id = (select id_endereco from usuarios where id = usuario_id);
+    set FOREIGN_KEY_CHECKS=1; -- to re-enable them
+
+	delete from usuarios where id = usuario_id;
     
 	delete from pedido_itens where id_pedido in (select id from pedidos where id_usuario = usuario_id);
         
@@ -215,4 +217,19 @@ begin
     
     delete from livros where id_editora = editora_id;
 	
+end$$
+
+
+DELIMITER $$
+create procedure P_LIVRO_DELETAR (
+	livro_id INT
+)
+begin
+
+	delete from pedido_itens where id_livro = livro_id;
+    
+    delete from livro_autor where id_livro =  livro_id;
+    
+    delete from livros where id = livro_id;
+
 end$$

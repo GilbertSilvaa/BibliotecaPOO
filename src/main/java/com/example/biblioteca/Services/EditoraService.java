@@ -1,6 +1,7 @@
 package com.example.biblioteca.Services;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -102,6 +103,16 @@ public class EditoraService {
     );
     
     SqlOperacoes.executar(query);
+
+    ResultSet idEditora = SqlOperacoes.consulta("select max(id) as id_editora from editoras");
+
+    try {
+      while(idEditora.next()) {
+        editora.setId(idEditora.getInt("id_editora"));
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
 
     return ResponseEntity.ok(editora);
   }
