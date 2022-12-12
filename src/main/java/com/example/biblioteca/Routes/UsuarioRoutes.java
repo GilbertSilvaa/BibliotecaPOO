@@ -13,12 +13,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.biblioteca.Models.Usuario;
+import com.example.biblioteca.Services.CrudService;
 import com.example.biblioteca.Services.UsuarioService;
 
 @RestController
 public class UsuarioRoutes {
 
-  private final UsuarioService usuarioService;
+  private final CrudService<Usuario> usuarioService;
 
 	public UsuarioRoutes(UsuarioService usuarioService) {
 		this.usuarioService = usuarioService;

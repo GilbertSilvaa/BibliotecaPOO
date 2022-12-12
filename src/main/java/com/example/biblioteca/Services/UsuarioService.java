@@ -12,7 +12,7 @@ import com.example.biblioteca.Models.Usuario;
 import com.example.biblioteca.Util.SqlOperacoes;
 
 @Service
-public class UsuarioService {
+public class UsuarioService implements CrudService<Usuario> {
 
   public UsuarioService() {}
   

@@ -13,7 +13,7 @@ import com.example.biblioteca.Models.Endereco;
 import com.example.biblioteca.Util.SqlOperacoes;
 
 @Service
-public class EditoraService {
+public class EditoraService implements CrudService<Editora>{
   
   public EditoraService() {}
 

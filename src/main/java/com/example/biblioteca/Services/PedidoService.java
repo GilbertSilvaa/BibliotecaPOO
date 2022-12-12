@@ -14,7 +14,7 @@ import com.example.biblioteca.Models.Usuario;
 import com.example.biblioteca.Util.SqlOperacoes;
 
 @Service
-public class PedidoService {
+public class PedidoService implements CrudService<Pedido> {
   
   public PedidoService() {}
 

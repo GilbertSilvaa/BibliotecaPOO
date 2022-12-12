@@ -15,7 +15,7 @@ import com.example.biblioteca.Models.Livro;
 import com.example.biblioteca.Util.SqlOperacoes;
 
 @Service
-public class LivroService {
+public class LivroService implements CrudService<Livro> {
   
   public LivroService() {}
 

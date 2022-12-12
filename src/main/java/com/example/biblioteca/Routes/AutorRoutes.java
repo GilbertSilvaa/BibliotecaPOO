@@ -14,11 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.biblioteca.Models.Autor;
 import com.example.biblioteca.Services.AutorService;
+import com.example.biblioteca.Services.CrudService;
 
 @RestController
 public class AutorRoutes {
  
-  private final AutorService autorService;
+  private final CrudService<Autor> autorService;
 
 	public AutorRoutes(AutorService autorService) {
 		this.autorService = autorService;

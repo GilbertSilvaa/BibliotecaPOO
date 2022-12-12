@@ -13,12 +13,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.biblioteca.Models.Editora;
+import com.example.biblioteca.Services.CrudService;
 import com.example.biblioteca.Services.EditoraService;
 
 @RestController
 public class EditoraRoutes {
   
-  private final EditoraService editoraService;
+  private final CrudService<Editora> editoraService;
 
   public EditoraRoutes(EditoraService editoraService) {
     this.editoraService = editoraService;
