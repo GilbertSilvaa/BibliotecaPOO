@@ -135,7 +135,6 @@ begin
     set FOREIGN_KEY_CHECKS=0; -- to disable them
     delete from enderecos
     where id = (select id_endereco from usuarios where id = usuario_id);
-    set FOREIGN_KEY_CHECKS=1; -- to re-enable them
 
 	delete from usuarios where id = usuario_id;
     
